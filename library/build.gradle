@@ -33,6 +33,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    //Test
+    compile 'org.mockito:mockito-core:2.7.18'
+
     //retrofit2
     def retrofitVersion = '2.3.0'
     def okhttpVersion = '3.9.1'

@@ -10,6 +10,11 @@ android:
     - android-26
     - extra
     
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+        
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -24,8 +29,9 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-before_install:
-- chmod +x gradlew
+before_script:
+    - chmod +x gradlew      #Grand permissions
+    - android list targets
 
 script:
   - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"

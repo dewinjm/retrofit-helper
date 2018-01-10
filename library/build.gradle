@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.dewinjm'
+group = 'com.github.dewinjm'
 
 android {
     compileSdkVersion 27
@@ -34,12 +34,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    //Test
+    compile 'org.mockito:mockito-core:2.7.18'
+
     //retrofit2
     def retrofitVersion = '2.3.0'
     def okhttpVersion = '3.9.1'
 
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-simplexml:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
     compile "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 }

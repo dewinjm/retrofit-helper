@@ -9,7 +9,7 @@ android:
     - build-tools-26.0.2
     - android-26
     - extra
-    
+
     # Additional components
     - extra-google-google_play_services
     - extra-google-m2repository
@@ -30,7 +30,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script:
-    - chmod +x gradlew      #Grand permissions
+    - chmod +x gradlew
     - android list targets
 
 script:

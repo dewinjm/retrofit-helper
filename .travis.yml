@@ -22,10 +22,6 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-before_script:
-  - chmod +x gradlew
-  - android list targets
-
 script:
-  -chmod +x ./gradlew build connectedCheck
-  #- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - chmod +x gradlew
+  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"

@@ -1,28 +1,46 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.dewinjm'
+group = 'com.github.dewinjm'
 
 android {
     compileSdkVersion 27
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 26
         targetSdkVersion 27
         versionCode 1
         versionName "1.0.1"
+        multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "8g"
+        preDexLibraries = false
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -31,14 +49,23 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //Test
+    implementation 'org.mockito:mockito-core:2.7.18'
 
     //retrofit2
     def retrofitVersion = '2.3.0'
     def okhttpVersion = '3.9.1'
 
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    compile "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+
+    implementation("com.squareup.retrofit2:converter-simplexml:$retrofitVersion") {
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
 }

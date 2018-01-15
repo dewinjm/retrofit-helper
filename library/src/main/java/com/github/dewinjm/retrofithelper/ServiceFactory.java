@@ -61,7 +61,7 @@ public class ServiceFactory implements Generator {
 
     /**
      * Create ServiceFactory instance
-     * */
+     */
     public static ServiceFactory builder(@NonNull String baseUrl) {
         setFactoryConvert(FACTORY_TYPE_DEFAULT);
         return ServiceInit(baseUrl);
@@ -97,6 +97,7 @@ public class ServiceFactory implements Generator {
 
     @NonNull
     private Retrofit callService() {
+        urlFormat();
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(factoryConvert)
@@ -108,5 +109,13 @@ public class ServiceFactory implements Generator {
             OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
             return retrofitBuilder.client(okHttpBuilder.build()).build();
         }
+    }
+
+    private void urlFormat() {
+        if (!baseUrl.contains("http"))
+            baseUrl = "http://" + baseUrl;
+
+        if (!baseUrl.substring(baseUrl.length() - 1, baseUrl.length()).equals("/"))
+            baseUrl += "/";
     }
 }

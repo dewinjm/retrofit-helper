@@ -5,7 +5,7 @@ group = 'com.github.dewinjm'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 16
@@ -45,16 +45,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
 
     //Test
-    implementation 'org.mockito:mockito-core:2.7.18'
+    testImplementation 'junit:junit:4.12'
+    implementation 'org.mockito:mockito-core:2.8.9'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 
     //retrofit2
-    def retrofitVersion = '2.3.0'
+    def retrofitVersion = '2.4.0'
     def okhttpVersion = '3.9.1'
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

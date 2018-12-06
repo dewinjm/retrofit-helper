@@ -18,7 +18,7 @@ repositories {
 And add the library to your module **build.gradle**:
 ``` groovy
 dependencies {
-    compile 'com.github.dewinjm:retrofit-helper:1.0.3'
+    compile 'com.github.dewinjm:retrofit-helper:1.0.4'
 }
 ```
 

@@ -18,6 +18,8 @@ package com.github.dewinjm.retrofithelper;
 
 import android.support.annotation.NonNull;
 
+import com.github.dewinjm.retrofithelper.utils.UnzippingInterceptor;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -35,14 +37,20 @@ public class ServiceFactory implements Generator {
 
     private OkHttpClient interceptor;
     private String baseUrl;
+    private boolean gzipEnableInterceptor = false;
 
     private static final int FACTORY_TYPE_DEFAULT = FACTORY_JSON;
     private static Converter.Factory factoryConvert;
 
-    private static ServiceFactory ServiceInit(String baseUrl) {
+    private static ServiceFactory ServiceInit(String baseUrl, boolean gzinEnable) {
         ServiceFactory serviceFactory = new ServiceFactory();
         serviceFactory.baseUrl = baseUrl;
+        serviceFactory.gzipEnableInterceptor = gzinEnable;
         return serviceFactory;
+    }
+
+    private static ServiceFactory ServiceInit(String baseUrl) {
+        return ServiceInit(baseUrl, false);
     }
 
     private static void setFactoryConvert(int factory) {
@@ -77,6 +85,11 @@ public class ServiceFactory implements Generator {
         return ServiceInit(providerBase.getDefaultBaseUrl());
     }
 
+    public static ServiceFactory builder(ProviderBase providerBase, int factoryType, boolean gzipEnable) {
+        setFactoryConvert(factoryType);
+        return ServiceInit(providerBase.getDefaultBaseUrl(), gzipEnable);
+    }
+
     /**
      * Set the OkHttpClient inteceptor, for Header, Auth, etc.
      */
@@ -107,6 +120,10 @@ public class ServiceFactory implements Generator {
             return retrofitBuilder.client(interceptor).build();
         else {
             OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+
+            if (gzipEnableInterceptor)
+                okHttpBuilder.addInterceptor(new UnzippingInterceptor());
+
             return retrofitBuilder.client(okHttpBuilder.build()).build();
         }
     }

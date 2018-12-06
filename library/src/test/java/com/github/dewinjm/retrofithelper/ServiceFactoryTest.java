@@ -27,7 +27,6 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -100,7 +99,7 @@ public class ServiceFactoryTest {
     }
 
     @Test
-    public void httpGetAsync() throws IOException, InterruptedException {
+    public void httpGetAsync() throws InterruptedException {
         createMockResponse();
         final AtomicReference<Response<MockClass>> responseRef = new AtomicReference<>();
         final CountDownLatch latch = new CountDownLatch(1);
@@ -127,7 +126,7 @@ public class ServiceFactoryTest {
     }
 
     @Test
-    public void httpGetSync() throws IOException, InterruptedException {
+    public void httpGetSync() throws IOException {
         createMockResponse();
         Response<MockClass> response = ServiceFactory.builder(urlBase)
                 .createService(MockService.class)
@@ -138,7 +137,7 @@ public class ServiceFactoryTest {
     }
 
     @Test
-    public void httpGetAsyncIntercepto() throws IOException, InterruptedException {
+    public void httpGetAsyncIntercepto() throws InterruptedException {
         createMockResponse();
         final AtomicReference<Response<MockClass>> responseRef = new AtomicReference<>();
         final CountDownLatch latch = new CountDownLatch(1);
@@ -166,7 +165,7 @@ public class ServiceFactoryTest {
     }
 
     @Test
-    public void transportProblemSync() throws ConnectException {
+    public void transportProblemSync() {
         MockService example = ServiceFactory.builder(urlBase)
                 .createRetrofitService()
                 .create(MockService.class);
@@ -185,7 +184,7 @@ public class ServiceFactoryTest {
     }
 
     @Test
-    public void responseBodyBuffers() throws IOException {
+    public void responseBodyBuffers() {
         Retrofit retrofit = ServiceFactory.builder(urlBase)
                 .createRetrofitService();
 

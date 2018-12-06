@@ -42,10 +42,10 @@ public class ServiceFactory implements Generator {
     private static final int FACTORY_TYPE_DEFAULT = FACTORY_JSON;
     private static Converter.Factory factoryConvert;
 
-    private static ServiceFactory ServiceInit(String baseUrl, boolean gzinEnable) {
+    private static ServiceFactory ServiceInit(String baseUrl, boolean gzipEnable) {
         ServiceFactory serviceFactory = new ServiceFactory();
         serviceFactory.baseUrl = baseUrl;
-        serviceFactory.gzipEnableInterceptor = gzinEnable;
+        serviceFactory.gzipEnableInterceptor = gzipEnable;
         return serviceFactory;
     }
 
